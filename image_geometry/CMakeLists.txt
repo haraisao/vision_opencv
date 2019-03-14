@@ -17,7 +17,10 @@ include_directories(${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
 
 # add a library
 add_library(${PROJECT_NAME} src/pinhole_camera_model.cpp src/stereo_camera_model.cpp)
-target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBRARIES})
+if(WIN32)
+  link_directories("${CMAKE_INSTALL_PREFIX}/lib")
+  target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBRARIES} rostime.lib)
+endif()
 add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
 
 install(DIRECTORY include/${PROJECT_NAME}/

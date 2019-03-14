@@ -30,7 +30,9 @@ catkin_package(
 )
 
 catkin_python_setup()
-
+if(WIN32)
+  link_directories("$ENV{PYTHON_DIR}/libs")
+endif()
 include_directories(include ${Boost_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS})
 
 if(NOT ANDROID)
